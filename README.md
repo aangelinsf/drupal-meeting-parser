@@ -32,45 +32,58 @@ itself allows remote participants to join slightly later. You should save the
 meeting logs a day or so later when the meeting text is still available but
 everybody had a chance to chime in.
 
+## The four buttons
+
+The extension injects four buttons at the top of every Slack page:
+
+- **Clear memory** — wipes all accumulated threads so you can start fresh.
+- **Add with credit** — captures the currently open thread and records its
+  participants for the Participants list (see below).
+- **Add without credit** — captures the thread text only; participants are
+  *not* added to the Participants list. Use this for introductory or off-topic
+  threads where credit is not appropriate.
+- **Copy X threads to clipboard** — copies everything accumulated so far
+  (all threads in the order you added them, plus the Participants list)
+  to the OS clipboard, ready to paste.
+
 ## How to use
 
-The extension has internal storage for all your added threads. You can
-clear the internal storage with 'Clear memory', add a thread to it with 
-'Add with credits' or 'Add without credits' and copy the contents of that
-storage (all the threads you added in the order you added them) to the
-operating system's clipboard with the 'Copy to clipboard' button.
+The extension accumulates threads in memory one at a time. You open each
+thread, capture it, then move to the next. When you have captured all the
+threads you want, you do a single paste into the Drupal.org meeting issue.
 
-1. Open each thread in the chat sidebar you want to add to the meeting notes.
-   Click one of the 'Add' buttons once the sidebar appears. Repeat this for all
-   threads you want to add to the notes. The script should scroll to the top
-   of the thread first to autoload all items and then scroll to the bottom
-   of the thread too until it loads all items from there as well.
+1. Open the first meeting thread in Slack by clicking its reply count.
+   Wait for the thread panel to appear on the right side of the screen.
 
-2. When done, click 'Copy X threads to clipboard'. Now your meeting notes are
-   on the operating system clipboard and can be pasted into the Drupal meeting
-   node for posterity.
+2. Click **Add with credit** (for substantive agenda threads) or
+   **Add without credit** (for roll-call, intro, or off-topic threads).
+   The button will show [Processing] while the extension scrolls through
+   the thread to load all messages, then turn yellow again when done.
 
-3. At the end of the paste, you will find a 'Participants' section. This
-   includes chat usernames of participants for threads you added 'with credit'.
-   It is a best practice to credit active meeting participants on the meeting
-   notes issue. You can do that by pasting the list of participants at the end
-   of your drupal.org meeting issue in the 'Credit others' textfield (in the
-   'Crediting & committing' fieldset). This field is only visible for maintainers
-   of a project. If you are not a maintainer, ask a maintainer to credit people.
+3. Open the next thread and click Add again. Repeat for every thread you
+   want to include in the meeting notes.
 
-   Do keep in mind two things. First of all, it is a best practice to only
-   credit active meeting participants. That is people who actually contributed
-   to the meeting. You can use the 'Add without credit' button for introductory or
-   off-topic threads you want to save without credits assigned. Second, drupal.org
-   usernames will not always be the same as chat usernames. When you save credits
-   after you pasted the list, check which users got credits and find and add the
-   actual drupal.org usernames for the missing participants to credit. Then save
-   them with another comment. Some common user name mappings are included with the
-   script. We can add more, please submit them as issues at
-   https://github.com/mdlutz24/drupal-meeting-parser/issues.
+4. When you have captured all threads, click **Copy X threads to clipboard**.
+   Your meeting notes are now on the clipboard.
 
-   Finally, don't forget to close the issue as fixed so the credits will be
-   granted.
+5. Go to the Drupal.org meeting issue node and paste. You will get:
+   - An HTML table for each thread, formatted for the issue body.
+   - A **Participants** section at the end listing everyone who spoke in
+     threads you captured with credit.
+
+6. Paste the Participants list into the **"Credit others"** field (inside
+   the "Crediting & committing" fieldset at the bottom of the issue).
+   This field is only visible to project maintainers. If you are not a
+   maintainer, ask one to handle crediting.
+
+**Note on usernames:** Drupal.org usernames are not always the same as Slack
+display names. After pasting, check which users received credits and manually
+add the correct Drupal.org usernames for anyone who was missed. Some common
+mappings are built into the extension. More can be added — please submit them
+as issues at https://github.com/mdlutz24/drupal-meeting-parser/issues.
+
+Finally, don't forget to close the issue as fixed so the credits will be
+granted.
 
 ## Contributing
 

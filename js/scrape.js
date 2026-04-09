@@ -132,7 +132,7 @@ let scraper = {
 
   parseThread: function() {
     this.startThread();
-    let sidebar = document.querySelectorAll('.p-flexpane .c-scrollbar__hider')[0];
+    let sidebar = document.querySelectorAll('[data-qa="flexpane_body"] .c-scrollbar__hider')[0];
     let finished = Math.ceil(sidebar.scrollTop + sidebar.offsetHeight) >= sidebar.scrollHeight;
     let user = '';
     sidebar.querySelectorAll('.c-virtual_list__item').forEach(function(message) {
@@ -207,7 +207,11 @@ let scraper = {
     // Check if the current top ID is already in the parsed IDs. It may not be
     // the absolute top ID yet, but is this thread was recorded, this ID should
     // also already be parsed.
-    let sidebar = document.querySelectorAll('.p-flexpane .c-scrollbar__hider')[0];
+    let sidebar = document.querySelectorAll('[data-qa="flexpane_body"] .c-scrollbar__hider')[0];
+    if (!sidebar) {
+      alert('No thread panel found. Please click on "X replies" under a message to open a thread first.');
+      return;
+    }
     this.lastTopId = sidebar.querySelector('.c-virtual_list__item').getAttribute('id');
     if (this.ids.includes(this.lastTopId)) {
       alert('This thread was already added. Pick another thread to add.');
@@ -237,7 +241,7 @@ let scraper = {
     // Slack loads the bottom of threads by default. We should scroll to the top enough
     // times to dynamically load all items in the thread and reach the starting message
     // of the thread.
-    let sidebar = document.querySelectorAll('.p-flexpane .c-scrollbar__hider')[0];
+    let sidebar = document.querySelectorAll('[data-qa="flexpane_body"] .c-scrollbar__hider')[0];
     if (this.lastTopId != sidebar.querySelector('.c-virtual_list__item').getAttribute('id')) {
       this.lastTopId = sidebar.querySelector('.c-virtual_list__item').getAttribute('id');
       sidebar.scrollTop = 0;
@@ -256,7 +260,7 @@ let scraper = {
   },
 
   addThreadHeader: function() {
-    let sidebar = document.querySelectorAll('.p-flexpane .c-scrollbar__hider')[0];
+    let sidebar = document.querySelectorAll('[data-qa="flexpane_body"] .c-scrollbar__hider')[0];
     let toppost = sidebar.querySelector('.c-virtual_list__item');
     this.ids.push(toppost.getAttribute('id'));
     this.ids.push(sidebar.querySelectorAll('.c-virtual_list__item')[1].getAttribute('id'));
